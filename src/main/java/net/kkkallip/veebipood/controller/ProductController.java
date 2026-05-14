@@ -3,10 +3,11 @@ package net.kkkallip.veebipood.controller;
 import net.kkkallip.veebipood.entity.Product;
 import net.kkkallip.veebipood.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -15,8 +16,17 @@ public class ProductController {
     @Autowired
     private ProductRepository productRepository;
 
+    //localhost:8080/products?page=0&size=4&sort=price,ascending
     @GetMapping("products")
-    public List<Product> getProducts() {
+    public Page<Product> getProducts(Pageable pageable, @RequestParam(required = false) Long activeCategoryId) {
+        if (activeCategoryId == null || activeCategoryId == 0L) {
+            return productRepository.findAll(pageable);
+        }
+        return productRepository.findAllByCategoryId(pageable, activeCategoryId);
+    }
+
+    @GetMapping("products/admin")
+    public List<Product> getAdminProducts() {
         return productRepository.findAll();
     }
 

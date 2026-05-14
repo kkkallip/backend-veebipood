@@ -1,7 +1,6 @@
 package net.kkkallip.veebipood.controller;
 
 import net.kkkallip.veebipood.entity.Category;
-import net.kkkallip.veebipood.entity.Product;
 import net.kkkallip.veebipood.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,9 +26,6 @@ public class CategoryController {
 
     @PostMapping("categories")
     public List<Category> addCategory(@RequestBody Category product) {
-        if (product.getId() != null) {
-            throw new RuntimeException("Cannot add with id");
-        }
         categoryRepository.save(product);
         return categoryRepository.findAll();
     }

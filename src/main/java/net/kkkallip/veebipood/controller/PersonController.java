@@ -2,7 +2,6 @@ package net.kkkallip.veebipood.controller;
 
 import net.kkkallip.veebipood.dto.PersonLoginRecordDto;
 import net.kkkallip.veebipood.entity.Person;
-import net.kkkallip.veebipood.entity.Product;
 import net.kkkallip.veebipood.repository.PersonRepository;
 import net.kkkallip.veebipood.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
